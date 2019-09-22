@@ -2,6 +2,13 @@ branch-defaults:
   default:
     environment: flask-env
     group_suffix: null
+  master:
+    environment: FlaskTutorial-env
+    group_suffix: null
+environment-defaults:
+  FlaskTutorial-env:
+    branch: null
+    repository: null
 global:
   application_name: flask-tutorial
   branch: null
@@ -14,5 +21,5 @@ global:
   platform_version: null
   profile: eb-cli
   repository: null
-  sc: null
+  sc: git
   workspace_type: Application
