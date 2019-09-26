@@ -26,7 +26,6 @@
         "url": "https://github.com/BlackrockDigital/startbootstrap-small-business.git"
     },
     "dependencies": {
-        "angular-route": "^1.7.8",
         "bootstrap": "4.1.1",
         "jquery": "3.3.1"
     },
