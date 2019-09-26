@@ -1,6 +1,6 @@
 //var app = angular.module("CustomerApp", []);
 
-CustomerApp.controller("homeController", function($scope, $http, $location, $window) {
+CustomerApp.controller("homeController", function($scope, $http, $location, $window, $mdDialog) {
 
     console.log("Loaded.")
 
@@ -294,10 +294,10 @@ CustomerApp.controller("homeController", function($scope, $http, $location, $win
     $scope.click = function() {
         console.log("Clicked.")
         console.log("Search type = " + $scope.search_type)
-    }
+    }  
 
 
 
-
+    
 });
 

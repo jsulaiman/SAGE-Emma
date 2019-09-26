@@ -1,9 +1,8 @@
 CustomerApp = angular.module('CustomerApp', [
-    'ngRoute'
+    'ngRoute','ngMaterial','ngMessages'
 ]);
 
-angular.
-module('CustomerApp').
+angular.module('CustomerApp').
 config(['$locationProvider', '$routeProvider',
     function config($locationProvider, $routeProvider) {
         $locationProvider.hashPrefix('!');
