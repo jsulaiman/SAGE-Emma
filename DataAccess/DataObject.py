@@ -63,8 +63,40 @@ class UsersRDB(BaseDataObject):
 
         return result
 
+    @classmethod
+    def delete_user(cls, user_info):
+        result = None
+        try:
+            template = {'id': user_info['id']}
+            sql, args = data_adaptor.delete(table_name="users", template=template)
+            res, data = data_adaptor.run_q(sql, args)
+            if res != 1:
+                result = None
+            else:
+                result = user_info['id']
 
+        except Exception as e:
+            raise DataException()
 
+        return result
+
+    @classmethod
+    def update_user(cls, user_info):
+        result = None
+        try:
+            new_val = {'password': user_info['password']}
+            template = {'id': user_info['id']}
+            sql, args = data_adaptor.create_update(table_name="users", new_values=new_val, template=template)
+            res, data = data_adaptor.run_q(sql, args)
+            if res != 1:
+                result = None
+            else:
+                result = user_info['id']
+
+        except Exception as e:
+            raise DataException()
+
+        return result
 
 
 

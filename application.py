@@ -209,6 +209,54 @@ def user_email(email):
 
     return full_rsp
 
+@application.route("/api/registrations", methods=["POST"])
+def registration():
+    try:
+        user_service = _get_user_service()
+        user_info = request.json
+        id = user_service.create_user(user_info)
+        if id is not None:
+            rsp_txt = "USER CREATED: "+id
+            rsp = Response(rsp_txt, status=201, mimetype='text/plain')
+    except Exception as e:
+        log_msg = "/user: Exception = " + str(e)
+        logger.error(log_msg)
+        rsp_status = 500
+        rsp_txt = "INTERNAL SERVER ERROR. " + log_msg
+        rsp = Response(rsp_txt, status=rsp_status, content_type="text/plain")
+    return rsp
+
+@application.route("/api/user", methods=["PUT", "DELETE"])
+def user():
+    try:
+        user_service = _get_user_service()
+        user_info = request.json
+
+        if request.method == 'PUT':
+            id = user_service.update_user(user_info)
+            if id is not None:
+                rsp_status = 200
+                rsp_txt = "id = "+ id + " password changed."
+
+        elif request.method == 'DELETE':
+            id = user_service.delete_user(user_info)
+            if id is not None:
+                rsp_status = 200
+                rsp_txt = "id = "+ id + " user deleted."
+
+        else:
+            rsp_data = None
+            rsp_status = 501
+            rsp_txt = "NOT IMPLEMENTED"
+        full_rsp = Response(rsp_txt, status=rsp_status, content_type="text/plain")
+    except Exception as e:
+        log_msg = "/user: Exception = " + str(e)
+        logger.error(log_msg)
+        rsp_status = 500
+        rsp_txt = "INTERNAL SERVER ERROR. Please take COMSE6156 -- Cloud Native Applications."
+        full_rsp = Response(rsp_txt, status=rsp_status, content_type="text/plain")
+
+    return full_rsp
 
 logger.debug("__name__ = " + str(__name__))
 # run the app.
